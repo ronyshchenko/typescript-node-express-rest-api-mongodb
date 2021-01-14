@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TeacherController = void 0;
 var teacher_model_1 = require("../models/teacher.model");
 var lesson_model_1 = require("../models/lesson.model");
-var teacher;
+var teacher = [];
 var teacherStr;
 exports.TeacherController = {
     createTeacher: function (_a) {
@@ -84,10 +84,14 @@ exports.TeacherController = {
                     .populate('teacherId', 'lastNameTeacher', { yearOfExpTeacher: { $gt: 10 }, canTeachSubjects: { $eq: 'maths' }
                 }).populate('classRoomId', 'nameClassRoom', { numberClassRoom: { $eq: '100' } })
                     .then(function (data) {
-                    teacherStr = JSON.stringify(data);
-                    console.log(data);
-                    console.log(teacherStr);
-                    return JSON.stringify(data);
+                    teacher.length = 0;
+                    data.forEach(function (element) {
+                        if (element.teacherId !== null && element.classRoomId !== null) {
+                            teacher.push(element.teacherId.lastNameTeacher);
+                        }
+                    });
+                    console.log(teacher);
+                    return teacher;
                 })
                     .catch(function (error) {
                     throw error;
@@ -121,7 +125,7 @@ exports.TeacherController = {
     updateTeacherById: function (id) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             console.log(id);
-            return [2 /*return*/, teacher_model_1.TeacherModel.findByIdAndUpdate(id, { firstNameTeacher: "Roma", lastNameTeacher: "Onysh" })
+            return [2 /*return*/, teacher_model_1.TeacherModel.findByIdAndUpdate(id, { firstNameTeacher: "Roma", lastNameTeacher: "Onyshchenko" })
                     .then(function (data) {
                     return data;
                 })

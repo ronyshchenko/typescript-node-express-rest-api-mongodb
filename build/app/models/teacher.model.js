@@ -8,7 +8,6 @@ var TeacherSchema = new mongoose_1.Schema({
     surNameTeacher: { type: String, required: true },
     lastNameTeacher: { type: String, required: true },
     emailTeacher: { type: String, required: true },
-    //lessonId: { type: Schema.Types.ObjectId, ref: 'LessonModel' },
     ageTeacher: { type: Number, required: true },
     sexTeacher: { type: String, required: true },
     yearOfExpTeacher: { type: Number, required: true },

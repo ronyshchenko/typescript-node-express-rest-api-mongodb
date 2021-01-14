@@ -1,7 +1,7 @@
 import { ITeacher, TeacherModel } from '../models/teacher.model';
 import { ILesson, LessonModel } from '../models/lesson.model';
 
-let teacher: string[];
+let teacher: Array<String> = [];
 let teacherStr: string;
 
 interface ICreateTeacherInput {
@@ -68,14 +68,15 @@ export const TeacherController = {
         'nameClassRoom',
         {numberClassRoom: {$eq : '100'}}
       )
-        
-        .then((data: ILesson) => {
-          teacherStr = JSON.stringify(data)
-          console.log(data)
-          console.log(teacherStr)
-
-         
-          return JSON.stringify(data);
+        .then((data: Array<100>) => {
+          teacher.length=0;
+          data.forEach((element: any) => {
+            if(element.teacherId !== null && element.classRoomId !== null) {
+              teacher.push(element.teacherId.lastNameTeacher)
+            } 
+          });
+          console.log(teacher)
+          return teacher;
         })
         .catch((error: Error) => {
           throw error;
@@ -108,7 +109,7 @@ export const TeacherController = {
         updateTeacherById: async (id: string): Promise<ITeacher> => {
           console.log(id) 
   
-          return TeacherModel.findByIdAndUpdate(id, {firstNameTeacher: "Roma", lastNameTeacher: "Onysh"})
+          return TeacherModel.findByIdAndUpdate(id, {firstNameTeacher: "Roma", lastNameTeacher: "Onyshchenko"})
             .then((data: ITeacher) => {
               return data;
             })
