@@ -1,5 +1,5 @@
 import { ITeacher, TeacherModel } from '../models/teacher.model';
-import {LessonModel, ILesson} from '../models/lesson.model'
+import { ILesson, LessonModel } from '../models/lesson.model';
 
 interface ICreateTeacherInput {
   firstNameTeacher: ITeacher['firstNameTeacher'];
@@ -11,7 +11,6 @@ interface ICreateTeacherInput {
   yearOfExpTeacher: ITeacher['yearOfExpTeacher'];
   workedInUniverTeacher: ITeacher['workedInUniverTeacher'];
   canTeachSubjects: ITeacher['canTeachSubjects'];
-  //teacherId: ITeacher['teacherId'];
 }
 
 export const TeacherController = {
@@ -25,7 +24,6 @@ export const TeacherController = {
     yearOfExpTeacher,
     workedInUniverTeacher,
     canTeachSubjects,
-    //teacherId
   }: ICreateTeacherInput): Promise<ITeacher> => {
     return TeacherModel.create({
       firstNameTeacher,
@@ -37,7 +35,6 @@ export const TeacherController = {
       yearOfExpTeacher,
       workedInUniverTeacher,
       canTeachSubjects
-      //teacherId
     })
       .then((data: ITeacher) => {
         return data;
@@ -50,6 +47,26 @@ export const TeacherController = {
     getAllTeacher: async (): Promise<ITeacher> => {
       return TeacherModel.find({})
         .then((data: ITeacher) => {
+          return data;
+        })
+        .catch((error: Error) => {
+          throw error;
+        })
+      },
+
+    getTeacherByCondition: async (): Promise<ILesson> => {
+      return LessonModel.find({lessonDayOfWeek:"thursday", lessonTime: {$gt : 8.5, $lt: 14.5}})
+      .populate({
+        path: 'teacherId',
+        match: {yearOfExpTeacher: {$gt : 10},canTeachSubjects: {$eq : 'maths'} 
+      }}).populate({
+        path: 'classRoomId',
+        match: {numberClassRoom: {$eq : '100'}}
+      })
+        
+        .then((data: ILesson) => {
+          console.log(data)
+          //for (let i=0; i<data.length; )
           return data;
         })
         .catch((error: Error) => {

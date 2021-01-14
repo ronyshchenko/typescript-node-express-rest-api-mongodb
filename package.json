@@ -1,8 +1,8 @@
 {
-  "name": "typescript-node-express-rest-api-mongodb",
+  "name": "rest-api-node-express-ts",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/ronyshchenko/typescript-node-express-rest-api-mongodb.git",
+  "repository": "https://github.com/ronyshchenko/rest-api-node-express-ts.git",
   "author": "ronyshchenko <roma.onyshchenko@gmail.com>",
   "license": "MIT",
   "scripts": {

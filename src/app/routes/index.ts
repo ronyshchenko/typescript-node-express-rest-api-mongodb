@@ -1,49 +1,9 @@
-// Controllers
-//import { UserController } from '../controllers/user.controller';
 import { TeacherController } from '../controllers/teacher.controller';
 import { LessonController } from '../controllers/Lesson.controller';
 import { ClassroomController } from '../controllers/Classroom.controller';
-
-// Types
 import { RoutesOptionsType } from '../types/routes';
 
-
-
-
 export const routes = ({app}: RoutesOptionsType) => {
-  // app.post('/api/user', async (req, res) => {
-  //   const user = await UserController.createUser({
-  //     firstName: req.body.firstName,
-  //     lastName: req.body.lastName,
-  //     email: req.body.email,
-  //   });
-
-  //   return res.send(user);
-  // }),
-
-  // app.put('/api/user/:id', async (req, res) => {
-  //   const user = await UserController.updateUserById(req.params.id);
-
-  //   return res.send(user);
-  // }),
-
-  // app.get('/api/user', async (req, res) => {
-  //   const user = await UserController.getAllUser();
-
-  //   return res.send(user);
-  // }),
-
-  // app.get('/api/user/:id', async (req, res) => {
-  //   const user = await UserController.findById(req.params.id);
-
-  //   return res.send(user);
-  // }),
-
-  // app.delete('/api/user/:id', async (req, res) => {
-  //   const user = await UserController.removeUserById(req.params.id);
-
-  //   return res.send(user);
-  // }),
 
   app.post('/api/teacher', async (req, res) => {
     const teacher = await TeacherController.createTeacher({
@@ -56,7 +16,6 @@ export const routes = ({app}: RoutesOptionsType) => {
       yearOfExpTeacher: req.body.yearOfExpTeacher,
       workedInUniverTeacher: req.body.workedInUniverTeacher,
       canTeachSubjects: req.body.canTeachSubjects,
-      //teacherId: req.body.teacherId
     });
 
     return res.send(teacher);
@@ -70,6 +29,12 @@ export const routes = ({app}: RoutesOptionsType) => {
 
   app.get('/api/teacher', async (req, res) => {
     const teacher = await TeacherController.getAllTeacher();
+
+    return res.send(teacher);
+  }),
+
+  app.get('/api/teacher-by-condition', async (req, res) => {
+    const teacher = await TeacherController.getTeacherByCondition();
 
     return res.send(teacher);
   }),
@@ -95,9 +60,7 @@ export const routes = ({app}: RoutesOptionsType) => {
       nameOfGroupStudents: req.body.nameOfGroupStudents,
       lessonTime: req.body.lessonTime,
       chatIdLesson: req.body.chatIdLesson,
-      //emailTeacher: req.body.emailTeacher,
       teacherId: req.body.teacherId,
-      //numberClassRoom: req.body.numberClassRoom,
       classRoomId: req.body.classRoomId
     });
 
@@ -110,14 +73,14 @@ export const routes = ({app}: RoutesOptionsType) => {
     return res.send(lesson);
   }),
 
-  app.get('/api/lesson', async (req, res) => {
-    const lesson = await LessonController.getAllLesson();
+  app.get('/api/lesson/:id', async (req, res) => {
+    const lesson = await LessonController.getLessonById(req.params.id);
 
     return res.send(lesson);
   }),
 
-  app.get('/api/lesson/:id', async (req, res) => {
-    const lesson = await LessonController.getLessonById(req.params.id);
+  app.get('/api/lesson/', async (req, res) => {
+    const lesson = await LessonController.getAllLesson();
 
     return res.send(lesson);
   }),
@@ -134,7 +97,6 @@ export const routes = ({app}: RoutesOptionsType) => {
       nameClassRoom: req.body.nameClassRoom,
       numberFloorClassRoom: req.body.numberFloorClassRoom,
       capacityClassRoom: req.body.capacityClassRoom,
-      //classRoomId:  req.body.classRoomId
     });
 
     return res.send(classroom);

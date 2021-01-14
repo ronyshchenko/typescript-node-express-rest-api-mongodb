@@ -1,0 +1,135 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TeacherController = void 0;
+var teacher_model_1 = require("../models/teacher.model");
+var lesson_model_1 = require("../models/lesson.model");
+exports.TeacherController = {
+    createTeacher: function (_a) {
+        var firstNameTeacher = _a.firstNameTeacher, surNameTeacher = _a.surNameTeacher, lastNameTeacher = _a.lastNameTeacher, emailTeacher = _a.emailTeacher, ageTeacher = _a.ageTeacher, sexTeacher = _a.sexTeacher, yearOfExpTeacher = _a.yearOfExpTeacher, workedInUniverTeacher = _a.workedInUniverTeacher, canTeachSubjects = _a.canTeachSubjects;
+        return __awaiter(void 0, void 0, void 0, function () {
+            return __generator(this, function (_b) {
+                return [2 /*return*/, teacher_model_1.TeacherModel.create({
+                        firstNameTeacher: firstNameTeacher,
+                        surNameTeacher: surNameTeacher,
+                        lastNameTeacher: lastNameTeacher,
+                        emailTeacher: emailTeacher,
+                        ageTeacher: ageTeacher,
+                        sexTeacher: sexTeacher,
+                        yearOfExpTeacher: yearOfExpTeacher,
+                        workedInUniverTeacher: workedInUniverTeacher,
+                        canTeachSubjects: canTeachSubjects
+                    })
+                        .then(function (data) {
+                        return data;
+                    })
+                        .catch(function (error) {
+                        throw error;
+                    })];
+            });
+        });
+    },
+    getAllTeacher: function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, teacher_model_1.TeacherModel.find({})
+                    .then(function (data) {
+                    return data;
+                })
+                    .catch(function (error) {
+                    throw error;
+                })];
+        });
+    }); },
+    getTeacherByCondition: function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, lesson_model_1.LessonModel.find({ lessonDayOfWeek: "thursday", lessonTime: { $gt: 8.5, $lt: 14.5 } })
+                    .populate({
+                    path: 'teacherId',
+                    match: { yearOfExpTeacher: { $gt: 10 }, canTeachSubjects: { $eq: 'maths' }
+                    }
+                }).populate({
+                    path: 'classRoomId',
+                    match: { numberClassRoom: { $eq: '100' } }
+                })
+                    .then(function (data) {
+                    console.log(data);
+                    //for (let i=0; i<data.length; )
+                    return data;
+                })
+                    .catch(function (error) {
+                    throw error;
+                })];
+        });
+    }); },
+    getTeacherById: function (id) { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            console.log(id);
+            return [2 /*return*/, teacher_model_1.TeacherModel.findById(id)
+                    .then(function (data) {
+                    return data;
+                })
+                    .catch(function (error) {
+                    throw error;
+                })];
+        });
+    }); },
+    removeTeacherById: function (id) { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            console.log(id);
+            return [2 /*return*/, teacher_model_1.TeacherModel.findByIdAndRemove(id)
+                    .then(function (data) {
+                    return data;
+                })
+                    .catch(function (error) {
+                    throw error;
+                })];
+        });
+    }); },
+    updateTeacherById: function (id) { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            console.log(id);
+            return [2 /*return*/, teacher_model_1.TeacherModel.findByIdAndUpdate(id, { firstNameTeacher: "Roma", lastNameTeacher: "Onysh" })
+                    .then(function (data) {
+                    return data;
+                })
+                    .catch(function (error) {
+                    throw error;
+                })];
+        });
+    }); }
+};
