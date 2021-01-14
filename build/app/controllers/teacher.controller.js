@@ -39,6 +39,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TeacherController = void 0;
 var teacher_model_1 = require("../models/teacher.model");
 var lesson_model_1 = require("../models/lesson.model");
+var teacher;
+var teacherStr;
 exports.TeacherController = {
     createTeacher: function (_a) {
         var firstNameTeacher = _a.firstNameTeacher, surNameTeacher = _a.surNameTeacher, lastNameTeacher = _a.lastNameTeacher, emailTeacher = _a.emailTeacher, ageTeacher = _a.ageTeacher, sexTeacher = _a.sexTeacher, yearOfExpTeacher = _a.yearOfExpTeacher, workedInUniverTeacher = _a.workedInUniverTeacher, canTeachSubjects = _a.canTeachSubjects;
@@ -78,18 +80,14 @@ exports.TeacherController = {
     getTeacherByCondition: function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             return [2 /*return*/, lesson_model_1.LessonModel.find({ lessonDayOfWeek: "thursday", lessonTime: { $gt: 8.5, $lt: 14.5 } })
-                    .populate({
-                    path: 'teacherId',
-                    match: { yearOfExpTeacher: { $gt: 10 }, canTeachSubjects: { $eq: 'maths' }
-                    }
-                }).populate({
-                    path: 'classRoomId',
-                    match: { numberClassRoom: { $eq: '100' } }
-                })
+                    .select('teacherId')
+                    .populate('teacherId', 'lastNameTeacher', { yearOfExpTeacher: { $gt: 10 }, canTeachSubjects: { $eq: 'maths' }
+                }).populate('classRoomId', 'nameClassRoom', { numberClassRoom: { $eq: '100' } })
                     .then(function (data) {
+                    teacherStr = JSON.stringify(data);
                     console.log(data);
-                    //for (let i=0; i<data.length; )
-                    return data;
+                    console.log(teacherStr);
+                    return JSON.stringify(data);
                 })
                     .catch(function (error) {
                     throw error;

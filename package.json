@@ -1,14 +1,14 @@
 {
-  "name": "rest-api-node-express-ts",
+  "name": "typescript-node-express-rest-api-mongodb",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/ronyshchenko/rest-api-node-express-ts.git",
+  "repository": "https://github.com/ronyshchenko/typescript-node-express-rest-api-mongodb",
   "author": "ronyshchenko <roma.onyshchenko@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "yarn compile && yarn execute",
     "compile": "tsc --build",
-    "execute": "nodemon ./build"
+    "execute": "node ./build"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.0",

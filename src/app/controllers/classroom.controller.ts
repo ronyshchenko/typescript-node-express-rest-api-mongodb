@@ -5,7 +5,6 @@ interface ICreateClassroomInput {
   nameClassRoom: IClassroom['nameClassRoom'];
   numberFloorClassRoom: IClassroom['numberFloorClassRoom'];
   capacityClassRoom: IClassroom['capacityClassRoom'];
-  //classRoomId: IClassroom['classRoomId'];
 }
 
 export const ClassroomController = {

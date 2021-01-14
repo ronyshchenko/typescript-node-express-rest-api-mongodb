@@ -1,6 +1,9 @@
 import { ITeacher, TeacherModel } from '../models/teacher.model';
 import { ILesson, LessonModel } from '../models/lesson.model';
 
+let teacher: string[];
+let teacherStr: string;
+
 interface ICreateTeacherInput {
   firstNameTeacher: ITeacher['firstNameTeacher'];
   surNameTeacher: ITeacher['surNameTeacher'];
@@ -56,18 +59,23 @@ export const TeacherController = {
 
     getTeacherByCondition: async (): Promise<ILesson> => {
       return LessonModel.find({lessonDayOfWeek:"thursday", lessonTime: {$gt : 8.5, $lt: 14.5}})
-      .populate({
-        path: 'teacherId',
-        match: {yearOfExpTeacher: {$gt : 10},canTeachSubjects: {$eq : 'maths'} 
-      }}).populate({
-        path: 'classRoomId',
-        match: {numberClassRoom: {$eq : '100'}}
-      })
+      .select('teacherId')
+      .populate(
+        'teacherId',
+        'lastNameTeacher',
+        {yearOfExpTeacher: {$gt : 10}, canTeachSubjects: {$eq : 'maths'}
+      }).populate('classRoomId', 
+        'nameClassRoom',
+        {numberClassRoom: {$eq : '100'}}
+      )
         
         .then((data: ILesson) => {
+          teacherStr = JSON.stringify(data)
           console.log(data)
-          //for (let i=0; i<data.length; )
-          return data;
+          console.log(teacherStr)
+
+         
+          return JSON.stringify(data);
         })
         .catch((error: Error) => {
           throw error;

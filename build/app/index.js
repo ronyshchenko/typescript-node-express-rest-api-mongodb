@@ -45,13 +45,6 @@ var app = express();
 var port = 8080;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.get('/', (req: Request, res: Response) =>
-//   {
-//     res.send('Welcome!');
-//     const lesson = await LessonController.getAllLesson();
-//     return res.send(lesson);
-//   }
-// );
 app.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var lesson;
     return __generator(this, function (_a) {
@@ -66,6 +59,6 @@ app.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, func
 app.listen(port, function () {
     return console.log("Application was started on port " + port + ".");
 });
-var db = 'mongodb+srv://ronyshchenko:morimorovich@cluster0.gmarx.mongodb.net/test3';
+var db = 'mongodb+srv://ronyshchenko:test@cluster0.gmarx.mongodb.net/test3';
 connect_1.connect({ db: db });
 routes_1.routes({ app: app });
